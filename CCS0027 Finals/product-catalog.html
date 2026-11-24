@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse AXIOM Apparel collections, filter pieces, and calculate a sample shopping bag.">
+    <title>Product Catalog | AXIOM Apparel</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main-style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top axiom-navbar" aria-label="Primary Navigation">
+        <div class="container axiom-container">
+            <a href="index.html" class="brand-logo">
+                <span class="logo-symbol" aria-hidden="true">ム</span>
+                <span>AXIOM<span class="brand-light">.</span></span>
+            </a>
+
+            <button class="navbar-toggler axiom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#axiomNav" aria-controls="axiomNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="axiomNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-4 py-3 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#categories">Collections</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="product-catalog.html" aria-current="page">Catalog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item mt-2 mt-lg-0">
+                        <a href="#bag-summary" class="nav-shop-btn">Bag (<span id="nav-bag-count">0</span>)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-banner">
+        <div class="container axiom-container">
+            <p class="section-kicker">SEASON 01 / ARCHIVE & STOREFRONT</p>
+            <h1>Product <span>Catalog.</span></h1>
+            <p class="page-banner-sub">Filter by collection, search by piece, or add items to your simulated bag.</p>
+        </div>
+    </header>
+
+    <main class="section-padding catalog-main">
+        <div class="container axiom-container">
+
+            <div class="filter-bar row g-3 align-items-center mb-5">
+                <div class="col-12 col-lg-7">
+                    <div class="d-flex flex-wrap gap-2" role="group" aria-label="Filter products by collection">
+                        <button type="button" class="filter-btn active" data-category="all">All Pieces</button>
+                        <button type="button" class="filter-btn" data-category="core-wear">Core Wear</button>
+                        <button type="button" class="filter-btn" data-category="future-form">Future Form</button>
+                        <button type="button" class="filter-btn" data-category="daily-objects">Daily Objects</button>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-5">
+                    <label for="catalog-search" class="visually-hidden">Search products</label>
+                    <input type="search" id="catalog-search" class="form-control axiom-input" placeholder="Search pieces (e.g., Jacket, Tee, Bag)...">
+                </div>
+            </div>
+
+            <div class="row g-4" id="catalog-grid">
+                <!-- Populated dynamically by js/main.js -->
+            </div>
+
+            <p id="no-results-msg" class="text-center mt-5 d-none" style="color: var(--muted);">
+                No pieces match your current filter or search. Try clearing the search box or selecting "All Pieces."
+            </p>
+
+            <section id="bag-summary" class="bag-panel mt-5 p-4 p-md-5" aria-labelledby="bag-heading">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+                    <div>
+                        <p class="section-kicker mb-1">SIMULATED SHOPPING BAG</p>
+                        <h2 id="bag-heading" class="h3 fw-bold m-0">Selected <span>Pieces</span></h2>
+                    </div>
+                    <button type="button" id="clear-bag-btn" class="btn-outline-axiom">Clear Bag</button>
+                </div>
+
+                <div id="bag-items-list" class="bag-items-list mb-4">
+                    <p class="mb-0" style="color: var(--muted);">Your bag is currently empty. Add a piece above to calculate your total.</p>
+                </div>
+
+                <div class="bag-footer d-flex flex-wrap justify-content-between align-items-center gap-3 pt-3">
+                    <div>
+                        <span class="d-block small" style="color: var(--muted);">Estimated Subtotal (Sample Prototype)</span>
+                        <strong id="bag-total" class="fs-4" style="color: var(--accent-light);">₱0</strong>
+                    </div>
+                    <button type="button" id="simulate-checkout-btn" class="btn-primary">Simulated Checkout <span aria-hidden="true">↗</span></button>
+                </div>
+
+                <div id="checkout-confirmation" class="alert-box mt-4 d-none" role="status" aria-live="polite"></div>
+            </section>
+
+            <p class="demo-note">
+                * Simulated shopping bag and checkout are for front-end demonstration purposes only; no real payment or order processing occurs.
+            </p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container axiom-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <span class="logo-symbol" aria-hidden="true">ム</span>
+                        <span>AXIOM<span class="brand-light">.</span></span>
+                    </a>
+                    <p class="footer-description">
+                        Streetwear for the self-defined.<br>
+                        Made for individuality. Built for what comes next.
+                    </p>
+                    <p class="footer-japanese">アクシオム — DEFINE YOUR OWN.</p>
+                </div>
+
+                <div>
+                    <h4>EXPLORE</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="product-catalog.html">Product Catalog</a></li>
+                        <li><a href="index.html#categories">Collections</a></li>
+                        <li><a href="index.html#about">Our story</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>INFORMATION</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">Our philosophy</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="product-catalog.html">Sizing & Pieces</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>FOLLOW THE MOVEMENT</h4>
+                    <p class="footer-description">Stay connected with the AXIOM universe.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+                        <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">TikTok <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AXIOM APPAREL. ALL RIGHTS RESERVED.</p>
+                <p>DESIGNED WITH INTENTION <span aria-hidden="true">✳</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
